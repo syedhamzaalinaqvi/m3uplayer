@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U8 Web Player Online </title>
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script type="nomodule" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+<!--Plyr Styling script
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+-->
+<!--JS cdn link-->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script>
+<!--Or if you want the latest version from the main branch-->
+<!--<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>-->
+    </head>
+
+<body>
+
+
+    <div class="video-container">
+        <video id="video" 
+            src=""></video>
+
+              <!-- Logo element -->
+              <img src="C:\Users\Hamza\Downloads\TextToImage_19_20240413.jpeg" id="player-logo" alt="Logo">
+
+        <script>
+//              https://cdn23lhr.tamashaweb.com:8087/jazzauth/ARYdigital-abr/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Mi8xOC8yMDI0IDQ6MTE6MDcgUE0maGFzaF92YWx1ZT1wVGlhQmIrTkYreGdmWHlac242VVV3PT0mdmFsaWRtaW51dGVzPTE= 
+        </script>
+        <!--http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 -->
+        <span class="custom-loader"></span>
+        <div class="player-state">
+            <span class="state-btn state-backward">
+                <ion-icon name="play-back-outline"></ion-icon>
+                <span class="backward-duration">5</span>
+            </span>
+            <span class="main-state state-btn">
+                <ion-icon name="play-outline"></ion-icon>
+            </span>
+            <span class="state-btn state-forward">
+                <span class="forward-duration">5</span>
+                <ion-icon name="play-forward-outline"></ion-icon>
+            </span>
+        </div>
+        <div class="controls">
+            <div class="duration">
+                <div class="current-time"></div>
+                <div class="hover-time">
+                    <span class="hover-duration"></span>
+                </div>
+                <div class="buffer"></div>
+            </div>
+            <div class="btn-controls">
+                <div class="btn-con">
+                    <span class="play-pause control-btn">
+                        <ion-icon name="play-outline"></ion-icon>
+                    </span>
+                    <span class="volume">
+                        <span class="mute-unmute control-btn">
+                            <ion-icon name="volume-high-outline"></ion-icon>
+                        </span>
+                        <div class="max-vol">
+                            <div class="current-vol"></div>
+                        </div>
+                    </span>
+                    <span class="time-container">
+                        <span class="current-duration">0:00</span>
+                        <span>/</span>
+                        <span class="total-duration">0:00</span>
+                    </span>
+                </div>
+                <div class="right-controls">
+                    <span class="backward control-btn" title="5 backward">
+                        <ion-icon name="play-back-outline"></ion-icon>
+                    </span>
+                    <span class="forward control-btn" title="5 forward">
+                        <ion-icon name="play-forward-outline"></ion-icon>
+                    </span>
+                    <!--      <span class="mini-player control-btn">
+            <ion-icon name="albums-outline"></ion-icon>
+          </span>
+          <span class="settings control-btn">
+            <span class="setting-btn">
+              <ion-icon name="options-outline"></ion-icon>
+            </span>
+            <ul class="setting-menu">
+              <li data-value="0.25">0.25x</li>
+              <li data-value="0.5">0.5x</li>
+              <li data-value="0.75">0.75x</li>
+              <li data-value="1" class="speed-active">1x</li>
+              <li data-value="1.25">1.25x</li>
+              <li data-value="1.5">1.5x</li>
+              <li data-value="1.75">1.75x</li>
+              <li data-value="2">2x</li>
+            </ul>
+          </span>
+          <span class="theater-btn control-btn">
+            <span class="theater-default">
+              <ion-icon name="tablet-landscape-outline"></ion-icon>
+            </span>
+            <span class="theater-active">
+              <ion-icon name="tv-outline"></ion-icon>
+            </span>
+          </span>-->
+                    <span class="fullscreen-btn control-btn" title="fullscreen">
+                        <span class="full">
+                            <ion-icon name="scan-outline"></ion-icon>
+                        </span>
+                        <span class="contract">
+                            <ion-icon name="contract-outline"></ion-icon>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="path/to/plyr.js"></script>
+    <script>
+      const player = new Plyr('#video');
+    </script>
+    
+    <script>
+      var video = document.getElementById('video');
+      var videoSrc = "https://cdn4506.jezt294anecte.com/stream2/i-cdn-0/c48eeb384d0fbbac7c42afaa7409a210/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT2pFVKxmTq1ENNdlVrlleaxWWtpUbOpmSr1kaS1mTUllMapWT35keJdnTqdWP:1713148912:154.192.2.25:ef95c8750a30c8a0912814a48b007cbf90b8fa0d666680f6c833dad050eb7d90/720/index.m3u8";
+      
+     // var videoSrc = "https://cdn21isb.tamashaweb.com:8087/jazzauth/Tensports-abr/live/157-3H/chunks.m3u8?nimblesessionid=11125077&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI0IDEwOjEwOjA2IEFNJmhhc2hfdmFsdWU9VEV6OVlNN1Zjb1k3TzZWVFVkclZOdz09JnZhbGlkbWludXRlcz0x";
+      if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+      }
+      // HLS.js is not supported on platforms that do not have Media Source
+      // Extensions (MSE) enabled.
+      //
+      // When the browser has built-in HLS support (check using `canPlayType`),
+      // we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video
+      // element through the `src` property. This is using the built-in support
+      // of the plain video element, without using HLS.js.
+      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+      }
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
