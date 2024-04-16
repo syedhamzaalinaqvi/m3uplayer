@@ -1,4 +1,30 @@
 
+//========= Input Script Start
+var input = document.getElementById("mediaLink");
+var inputbtn = document.getElementById("input-play-btn");
+
+
+inputbtn.addEventListener("focus", function() {
+ inputbtn.style.border='1px solid black';
+
+});
+inputbtn.addEventListener("blur", function() {
+inputbtn.style.border='none';
+// input.classList.remove('mediainput');
+})
+input.addEventListener("focus", function() {
+ input.style.border='2px solid #ff6a00';
+
+});
+input.addEventListener("blur", function() {
+input.style.border='none';
+// input.classList.remove('mediainput');
+})
+
+//============ Player Logo script Start
+//......
+
+//============player Functionality start 
 const fullscreen = document.querySelector(".fullscreen-btn");
 const playPause = document.querySelector(".play-pause");
 const volume = document.querySelector(".volume");
@@ -92,11 +118,12 @@ duration.addEventListener("mouseleave", (e) => {
   hoverDuration.innerHTML = "";
 });
 
+videoContainer.addEventListener("mouseleave", hideControls);
 videoContainer.addEventListener("click", toggleMainState);
 videoContainer.addEventListener("fullscreenchange", () => {
   videoContainer.classList.toggle("fullscreen", document.fullscreenElement);
 });
-videoContainer.addEventListener("mouseleave", hideControls);
+
 videoContainer.addEventListener("mousemove", (e) => {
   controls.classList.add("show-controls");
   hideControls();
@@ -400,6 +427,19 @@ function toggleTheater() {
   }
 }
 
+// Add event listener to video container
+const videoContainer2 = document.querySelector('.video-container');
+videoContainer2.addEventListener('click', toggleVideoPlayback);
+
+function toggleVideoPlayback() {
+    if (video.paused) {
+        play();
+    } else {
+        pause();
+    }
+}
+
+
 function toggleMiniPlayer() {
   if (document.pictureInPictureElement) {
     document.exitPictureInPicture();
@@ -511,13 +551,16 @@ toggleIconsForTheaterMode();
   toggleIconsForTheaterMode();
 }*/
 // Player Logo script
-var video = document.getElementById("video");
-const playerLogo = document.getElementById("player-logo");
 
-video.addEventListener("mouseenter", function() {
-  playerLogo.style.display = "block";
-});
+document.querySelector(".video-container").addEventListener("click", togglePlayPause);
 
-video.addEventListener("mouseleave", function() {
-  playerLogo.style.display = "none";
-});
+function togglePlayPause() {
+  
+
+  if (video.paused) {
+    play();
+  } else {
+    pause();
+  }
+  play();
+}

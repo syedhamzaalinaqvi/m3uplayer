@@ -25,14 +25,25 @@
     </head>
 
 <body>
+<style>
+  
+</style>
+<!-- Uswer Input HTML -->
+   <div class="input-div">
+    <h4 class="inputheadingtxt"> Paste Your Media Source MP4, MKV, M3U8, and Other Live source Link here </h4>
+    <input type="text"  id="mediaLink" placeholder="Paste your media link here">
+    <button id="input-play-btn" onclick="playMedia()">Play</button>
+
+   </div>
 
 
-    <div class="video-container">
-        <video id="video" 
-            src=""></video>
+    <!-- Player HTML-->
+    <div class="video-container" id="video-container">
+        <video id="video" src=""></video>
 
               <!-- Logo element -->
-              <img src="C:\Users\Hamza\Downloads\TextToImage_19_20240413.jpeg" id="player-logo" alt="Logo">
+              <img src="C:\Users\Hamza\Downloads\TextToImage_19_20240413.jpeg" class="logo" id="videoLogo">
+              
 
         <script>
 //              https://cdn23lhr.tamashaweb.com:8087/jazzauth/ARYdigital-abr/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Mi8xOC8yMDI0IDQ6MTE6MDcgUE0maGFzaF92YWx1ZT1wVGlhQmIrTkYreGdmWHlac242VVV3PT0mdmFsaWRtaW51dGVzPTE= 
@@ -126,32 +137,67 @@
     </div>
 
     <script src="path/to/plyr.js"></script>
-    <script>
-      const player = new Plyr('#video');
-    </script>
-    
-    <script>
-      var video = document.getElementById('video');
-      var videoSrc = "https://cdn4506.jezt294anecte.com/stream2/i-cdn-0/c48eeb384d0fbbac7c42afaa7409a210/MJTMsp1RshGTygnMNRUR2N2MSlnWXZEdMNDZzQWe5MDZzMmdZJTO1R2RWVHZDljekhkSsl1VwYnWtx2cihVT2pFVKxmTq1ENNdlVrlleaxWWtpUbOpmSr1kaS1mTUllMapWT35keJdnTqdWP:1713148912:154.192.2.25:ef95c8750a30c8a0912814a48b007cbf90b8fa0d666680f6c833dad050eb7d90/720/index.m3u8";
+<script>const player = new Plyr('#video'); </script>
+<script>
+    // Video.js script for hls/m3u files
+              // Set the default media link for demonstration
+              var defaultVideoSrc = "https://live-par-2-cdn-alt.livepush.io/live/bigbuckbunnyclip/index.m3u8";
       
-     // var videoSrc = "https://cdn21isb.tamashaweb.com:8087/jazzauth/Tensports-abr/live/157-3H/chunks.m3u8?nimblesessionid=11125077&wmsAuthSign=c2VydmVyX3RpbWU9NC8xMS8yMDI0IDEwOjEwOjA2IEFNJmhhc2hfdmFsdWU9VEV6OVlNN1Zjb1k3TzZWVFVkclZOdz09JnZhbGlkbWludXRlcz0x";
-      if (Hls.isSupported()) {
-        var hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(video);
+        
+      // Initialize the video element
+      var video = document.getElementById('video');
+      var defaultVideoLoaded = false; // Flag to track if default video is loaded
+
+      // Function to play the media
+      function playMedia() {
+          // Get the media link from the input field
+          var mediaLink = document.getElementById('mediaLink').value;
+          // Check if the link is not empty
+          if (mediaLink.trim() !== '') {
+              loadMedia(mediaLink);
+          }else{
+            alert("Please paste media URL")
+          }
       }
-      // HLS.js is not supported on platforms that do not have Media Source
-      // Extensions (MSE) enabled.
-      //
-      // When the browser has built-in HLS support (check using `canPlayType`),
-      // we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video
-      // element through the `src` property. This is using the built-in support
-      // of the plain video element, without using HLS.js.
-      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoSrc;
+
+      // Function to load media into the video element
+      function loadMedia(mediaSrc) {
+          // Check if HLS is supported
+          if (Hls.isSupported()) {
+              var hls = new Hls();
+              hls.loadSource(mediaSrc);
+              hls.attachMedia(video);
+              video.load();
+            video.play();
+          }
+          // HLS.js is not supported on platforms that do not have Media Source
+          // Extensions (MSE) enabled.
+          //
+          // When the browser has built-in HLS support (check using `canPlayType`),
+          // we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video
+          // element through the `src` property. This is using the built-in support
+          // of the plain video element, without using HLS.js.
+          else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+              video.src = mediaSrc;
+          }
       }
-    </script>
+
+      // Load default media when the page is loaded
+      window.onload = function() {
+          loadMedia(defaultVideoSrc);
+          defaultVideoLoaded = true;
+      };
+
+      // Check if default video is loaded, if not, load default video when user clicks play
+      function playDefaultVideoIfNeeded() {
+          if (!defaultVideoLoaded) {
+              loadMedia(defaultVideoSrc);
+              defaultVideoLoaded = true;
+          }
+      }
+
     
+    </script>
     <script src="script.js"></script>
 </body>
 
