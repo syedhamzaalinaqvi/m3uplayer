@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M3U8 Web Player Online </title>
+    <title> AnyWebPlayer Free Online Player | M3U8, MP4, MKV Files play online</title>
     <link rel="stylesheet" href="style.css">
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -28,22 +28,34 @@
 <style>
   
 </style>
-<!-- Uswer Input HTML -->
+<!-- Uswer Media Input HTML -->
    <div class="input-div">
-    <h4 class="inputheadingtxt"> Paste Your Media Source MP4, MKV, M3U8, and Other Live source Link here </h4>
-    <input type="text"  id="mediaLink" placeholder="Paste your media link here">
-    <button id="input-play-btn" onclick="playMedia()">Play</button>
-
-   </div>
+    <h4 class="inputheadingtxt"> Paste Your Media Source MP4, MKV, M3U8, MP3 and Other Live source Link here </h4>
+    <input type="text" class="user-input" id="mediaLink" placeholder="Paste your media link here">
+    <button class="user-btn" id="input-play-btn" onclick="playMedia()">Play</button>
+<!-- Uswer Logo Input HTML -->
+    <input type="text" class="user-input" id="logoUrl" placeholder="Paste your logo URL here"> 
+    <div class="btn-inline-div">
+    <button class="user-btn" id="update-logo-btn" onclick="updateLogo()">Update Logo</button>
+    <button class="user-btn" id="remove-logo-btn" onclick="removeLogo()">Remove Logo</button>
+    </div>
+</div>
 
 
     <!-- Player HTML-->
     <div class="video-container" id="video-container">
-        <video id="video" src=""></video>
-
+        <video id="video" src="" oncontextmenu="showContextMenu(event)"></video>
               <!-- Logo element -->
-              <img src="C:\Users\Hamza\Downloads\TextToImage_19_20240413.jpeg" class="logo" id="videoLogo">
-              
+            <img src="C:\Users\Hamza\Downloads\TextToImage_19_20240413.jpeg" class="logo" id="videoLogo">
+                <!-- Context Menu -->
+               
+                    
+               
+                  <div id="context-menu">
+                    <ul>
+                      <li><span>&#8226;</span> AnyWebPlayer</li>
+                    </ul>
+                  </div>   
 
         <script>
 //              https://cdn23lhr.tamashaweb.com:8087/jazzauth/ARYdigital-abr/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Mi8xOC8yMDI0IDQ6MTE6MDcgUE0maGFzaF92YWx1ZT1wVGlhQmIrTkYreGdmWHlac242VVV3PT0mdmFsaWRtaW51dGVzPTE= 
@@ -159,7 +171,50 @@
             alert("Please paste media URL")
           }
       }
+  
+  /*===========New Load media testing */
 
+
+  
+  function loadMedia(mediaSrc) {
+    // Check if the link is for MP3 file
+    if (mediaSrc.toLowerCase().endsWith('.mp3')) {
+        // Set the source directly to the video element for MP3 files
+        video.src = mediaSrc;
+    } else {
+        // Handle other formats like M3U8, MP4, MKV
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(mediaSrc);
+            hls.attachMedia(video);
+            video.load();
+            video.play();
+          audio.play();
+             handleMediaSource(mediaSrc);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = mediaSrc;
+             handleMediaSource(mediaSrc);
+        }
+    }
+}
+
+
+  
+  function handleMediaSource(mediaSrc) {
+    // Check if the media source is a live stream
+    var isLive = mediaSrc.toLowerCase().includes('m3u8') || mediaSrc.toLowerCase().includes('rtmp');
+    
+    // Get the live indicator element
+    var liveIndicator = document.querySelector('.live-indicator');
+
+    // If the media source is live, show the live indicator
+    if (isLive) {
+        liveIndicator.style.display = 'inline-block';
+    } else {
+        liveIndicator.style.display = 'none';
+    }
+}
+  /*
       // Function to load media into the video element
       function loadMedia(mediaSrc) {
           // Check if HLS is supported
@@ -181,7 +236,7 @@
               video.src = mediaSrc;
           }
       }
-
+*/
       // Load default media when the page is loaded
       window.onload = function() {
           loadMedia(defaultVideoSrc);
@@ -198,6 +253,7 @@
 
     
     </script>
+
     <script src="script.js"></script>
 </body>
 
