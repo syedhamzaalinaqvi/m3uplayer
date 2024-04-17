@@ -1,7 +1,7 @@
 
 //========= Input Script Start
-var input = document.getElementById("mediaLink");
-var inputbtn = document.getElementById("input-play-btn");
+var input = document.getElementsByClassName(".user-input");
+var inputbtn = document.getElementsByClassName(".user-btn");
 
 
 inputbtn.addEventListener("focus", function() {
@@ -22,9 +22,55 @@ input.style.border='none';
 })
 
 //============ Player Logo script Start
-//......
+ 
+// Function to remove the logo image
+function removeLogo() {
+  var logoImage = document.getElementById('videoLogo');
+  logoImage.remove(); // Remove the entire img element
+}
+// Function to update the logo image based on user input
+// Function to update the logo image based on user input
+function updateLogo() {
+  var logoUrl = document.getElementById('logoUrl').value;
+
+  if (logoUrl.trim() !== '') {
+      var logoImage = document.getElementById('videoLogo');
+      if (!logoImage) {
+          // If logoImage doesn't exist, create a new img element
+          logoImage = document.createElement('img');
+          logoImage.id = 'videoLogo';
+          logoImage.classList.add('logo') ;
+          var videoContainer = document.getElementById('video-container');
+          videoContainer.appendChild(logoImage);
+      }
+      logoImage.src = logoUrl;
+  } else {
+      alert("Please enter the URL of your logo image.");
+  }
+}
+
 
 //============player Functionality start 
+//---Context menu Script
+function showContextMenu(event) {
+  event.preventDefault();
+  const contextMenu = document.getElementById("context-menu");
+  contextMenu.style.display = "block";
+  contextMenu.style.left = event.pageX + "px";
+  contextMenu.style.top = event.pageY + "px";
+}
+
+document.addEventListener("click", function(event) {
+  const contextMenu = document.getElementById("context-menu");
+  if (!contextMenu.contains(event.target)) {
+    contextMenu.style.display = "none";
+  }
+});
+
+  
+  
+  //========== Player script start here
+
 const fullscreen = document.querySelector(".fullscreen-btn");
 const playPause = document.querySelector(".play-pause");
 const volume = document.querySelector(".volume");
@@ -76,7 +122,18 @@ video.addEventListener("waiting", handleWaiting);
 video.addEventListener("playing", handlePlaying);
 //chatgpt update
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener('click', toggleVideoPlayback);
 
+function toggleVideoPlayback() {
+    if (video.paused) {
+        play();
+    } else {
+        pause();
+    }
+}
+
+  
+  
 document.addEventListener("keydown", handleShorthand);
 fullscreen.addEventListener("click", toggleFullscreen);
 
@@ -317,6 +374,7 @@ function toggleMuteUnmute() {
   }
 }
 
+ 
 function hideControls() {
   if (timeout) {
     clearTimeout(timeout);
@@ -550,17 +608,5 @@ toggleIconsForTheaterMode();
   videoContainer.classList.toggle("theater");
   toggleIconsForTheaterMode();
 }*/
-// Player Logo script
 
-document.querySelector(".video-container").addEventListener("click", togglePlayPause);
 
-function togglePlayPause() {
-  
-
-  if (video.paused) {
-    play();
-  } else {
-    pause();
-  }
-  play();
-}
