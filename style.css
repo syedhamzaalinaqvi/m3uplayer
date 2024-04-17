@@ -3,9 +3,9 @@
 /*input Styling Start*/
 .input-div{
   width: 80%;
-  height: 200px;
+  height: fit-content;
   margin: auto;
-  background-color: rgb(194, 192, 196);
+  background-color: rgb(19, 16, 16);
   display: flex;
   flex-direction: column;
   justify-content: center;   
@@ -13,13 +13,14 @@
   margin-bottom: 10px;
   padding: 10px 0;
   text-align: center;
+  
 }
 .inputheadingtxt{
   font-size: 18px;
  color: rgb(9, 243, 20);
   text-shadow: 2px 2px 4px rgba(59, 58, 58, 0.5);
 }
-#mediaLink{
+#mediaLink, .user-input{
   width: 50%;
   align-self: center;
   height: 40px;
@@ -30,7 +31,7 @@
 border: none;    
 }
 
-#input-play-btn{
+#input-play-btn, .user-btn{
   width: 30%;
   height: 80px;
   outline: none;
@@ -42,15 +43,23 @@ border: none;
   font-size: 25px;
   cursor: pointer;
 }
-#input-play-btn:hover{
+#input-play-btn:hover,.user-btn:hover{
   background-color:  #b65f21;
 }
+.btn-inline-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#update-logo-btn,#remove-logo-btn{
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
 
-/*Player Logo styling Start*/
-.video-container {
-  position: relative;
 }
 
+
+/*Player Logo styling Start*/
 .logo {
   position: absolute;
   width: 50px;
@@ -58,9 +67,41 @@ border: none;
   top: 10px;
   right: 10px;
   z-index: 1000; /* Ensure logo appears above video controls */
+  border-radius: 50%;
 }
 
-/*Player styling Start*/
+/*====Player styling Start*/
+/* Context menu styling*/
+
+#context-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 5px 0;
+}
+
+#context-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#context-menu ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#context-menu ul li:hover {
+  background-color: #f0f0f0;
+}
+
+#context-menu ul li span {
+  margin-right: 5px;
+}
+
+
 
 .video-container {
     width: 80%;
